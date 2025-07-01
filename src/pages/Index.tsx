@@ -7,6 +7,7 @@ import { ReservationsModule } from "@/components/ReservationsModule";
 import { EmployeeModule } from "@/components/EmployeeModule";
 import { RevenueModule } from "@/components/RevenueModule";
 import { SettingsModule } from "@/components/SettingsModule";
+import { AICallingModule } from "@/components/AICallingModule";
 
 const Index = () => {
   const [activeModule, setActiveModule] = useState("dashboard");
@@ -24,6 +25,8 @@ const Index = () => {
         return <EmployeeModule />;
       case "revenue":
         return <RevenueModule />;
+      case "ai-calling":
+        return <AICallingModule />;
       case "settings":
         return <SettingsModule />;
       default:

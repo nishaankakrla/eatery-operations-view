@@ -10,7 +10,8 @@ import {
   Menu,
   X,
   Bell,
-  ChefHat
+  ChefHat,
+  Phone
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -29,6 +30,7 @@ export const Sidebar = ({ activeModule, setActiveModule, collapsed, setCollapsed
     { id: "reservations", label: "Reservations", icon: Calendar, badge: "5" },
     { id: "employees", label: "Employees", icon: Users, badge: null },
     { id: "revenue", label: "Revenue", icon: TrendingUp, badge: null },
+    { id: "ai-calling", label: "AI Calling", icon: Phone, badge: "Live" },
     { id: "settings", label: "Settings", icon: Settings, badge: null },
   ];
 
@@ -73,7 +75,14 @@ export const Sidebar = ({ activeModule, setActiveModule, collapsed, setCollapsed
                 <>
                   <span className="font-medium">{item.label}</span>
                   {item.badge && (
-                    <Badge variant="secondary" className="ml-auto bg-orange-600 text-white">
+                    <Badge 
+                      variant="secondary" 
+                      className={`ml-auto ${
+                        item.id === 'ai-calling' 
+                          ? 'bg-green-600 text-white animate-pulse' 
+                          : 'bg-orange-600 text-white'
+                      }`}
+                    >
                       {item.badge}
                     </Badge>
                   )}
