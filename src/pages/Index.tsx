@@ -1,12 +1,49 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState } from "react";
+import { Sidebar } from "@/components/Sidebar";
+import { Dashboard } from "@/components/Dashboard";
+import { OrdersModule } from "@/components/OrdersModule";
+import { ReservationsModule } from "@/components/ReservationsModule";
+import { EmployeeModule } from "@/components/EmployeeModule";
+import { RevenueModule } from "@/components/RevenueModule";
+import { SettingsModule } from "@/components/SettingsModule";
 
 const Index = () => {
+  const [activeModule, setActiveModule] = useState("dashboard");
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  const renderActiveModule = () => {
+    switch (activeModule) {
+      case "dashboard":
+        return <Dashboard />;
+      case "orders":
+        return <OrdersModule />;
+      case "reservations":
+        return <ReservationsModule />;
+      case "employees":
+        return <EmployeeModule />;
+      case "revenue":
+        return <RevenueModule />;
+      case "settings":
+        return <SettingsModule />;
+      default:
+        return <Dashboard />;
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="flex h-screen bg-gray-50">
+      <Sidebar 
+        activeModule={activeModule}
+        setActiveModule={setActiveModule}
+        collapsed={sidebarCollapsed}
+        setCollapsed={setSidebarCollapsed}
+      />
+      <main className={`flex-1 transition-all duration-300 ${sidebarCollapsed ? 'ml-16' : 'ml-64'} overflow-auto`}>
+        <div className="p-6">
+          {renderActiveModule()}
+        </div>
+      </main>
     </div>
   );
 };
